@@ -1,0 +1,27 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "S22FLIP-user-11-RKQ1.210416.002-LTE_S02113.11_N_S22Flip_0.030.03-release-keys" ]
+  pull_request:
+    branches: [ "S22FLIP-user-11-RKQ1.210416.002-LTE_S02113.11_N_S22Flip_0.030.03-release-keys" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: configure
+      run: ./configure
+
+    - name: Install dependencies
+      run: make
+
+    - name: Run check
+      run: make check
+
+    - name: Run distcheck
+      run: make distcheck
